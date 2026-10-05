@@ -6,12 +6,20 @@
   <title>Tanman Singh | CV</title>
   <style>
     :root {
-      --bg: #f4f6f9;
-      --card: #ffffff;
-      --border: #dfe6ee;
-      --text: #101828;
-      --muted: #4b5563;
-      --accent: #1d6feb;
+      --bg-dark: #2d3238;
+      --toolbar: #2a2d30;
+      --toolbar-border: rgba(255,255,255,0.12);
+      --page-bg: #f2f3f5;
+      --card-bg: #f9f9f8;
+      --text: #1d2433;
+      --muted: #5b667a;
+      --soft: #6d7b8d;
+      --heading: #2b3d5d;
+      --line: #dfe5ee;
+      --blue: #1d6feb;
+      --blue-soft: #dfeeff;
+      --chip: #eef2f8;
+      --shadow: rgba(17, 24, 39, 0.08);
     }
 
     * { box-sizing: border-box; }
@@ -19,39 +27,359 @@
     html, body {
       margin: 0;
       padding: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--bg);
-      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg-dark);
       color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
       min-height: 100vh;
     }
 
-    .pdf-viewer {
-      width: 100%;
-      height: 100vh;
-      background: var(--card);
-      border: 0;
-      overflow: hidden;
+    .toolbar {
+      height: 54px;
+      background: var(--toolbar);
+      border-bottom: 1px solid var(--toolbar-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px 0 12px;
+      color: #fff;
+      gap: 12px;
     }
 
-    embed {
+    .toolbar-left,
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hamburger {
+      width: 18px;
+      height: 18px;
+      position: relative;
+      display: inline-block;
+      opacity: 0.8;
+    }
+
+    .hamburger span {
+      position: absolute;
+      left: 0;
       width: 100%;
-      height: 100%;
-      display: block;
-      border: 0;
+      height: 2px;
+      background: #e7ebf2;
+      border-radius: 2px;
+    }
+
+    .hamburger span:nth-child(1) { top: 2px; }
+    .hamburger span:nth-child(2) { top: 8px; }
+    .hamburger span:nth-child(3) { top: 14px; }
+
+    .file-name {
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0.95;
+      white-space: nowrap;
+    }
+
+    .toolbar-center {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #d7dce5;
+      font-size: 14px;
+      min-width: 300px;
+      justify-content: center;
+    }
+
+    .page-indicator {
+      min-width: 44px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      padding: 4px 8px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .toolbar-badge {
+      padding: 5px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.03);
+      opacity: 0.9;
+    }
+
+    .toolbar-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.12);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.8;
+      font-size: 11px;
+    }
+
+    .document-shell {
+      padding: 24px 0 40px;
+      background: var(--bg-dark);
+      min-height: calc(100vh - 54px);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .document {
+      width: min(1080px, 88vw);
+      background: #f5f5f4;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 0;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.12);
+      padding: 34px 46px 30px 46px;
+      min-height: 980px;
+    }
+
+    .header-row {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 28px;
+      align-items: start;
+      margin-bottom: 22px;
+    }
+
+    .name {
+      font-size: clamp(2.4rem, 5vw, 5rem);
+      line-height: 0.95;
+      margin: 0;
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      color: var(--heading);
+    }
+
+    .title {
+      font-size: clamp(1.2rem, 2vw, 2.4rem);
+      font-weight: 400;
+      line-height: 1.4;
+      margin-top: 10px;
+      color: #2e3d54;
+      letter-spacing: -0.03em;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      padding: 18px 28px;
+      margin-top: 28px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 8px 18px rgba(29,111,235,0.25);
+    }
+
+    .download-btn:hover {
+      filter: brightness(1.02);
+    }
+
+    .right-pane {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 24px;
+      padding-top: 8px;
+    }
+
+    .info-block {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .icon-box {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #dfe8f5;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #3b4c65;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .info-block strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .section {
+      margin-top: 26px;
+    }
+
+    h2 {
+      font-size: clamp(1.4rem, 2.2vw, 2rem);
+      color: var(--heading);
+      margin: 0 0 14px;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+
+    .about p {
+      margin: 0;
+      font-size: 1.02rem;
+      line-height: 1.65;
+      color: #2e3d54;
+      max-width: 1050px;
+    }
+
+    .experience {
+      margin-top: 18px;
+    }
+
+    .job-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--heading);
+      margin: 0 0 2px;
+      letter-spacing: -0.03em;
+    }
+
+    .job-meta {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--text);
+    }
+
+    li {
+      margin: 8px 0;
+      line-height: 1.58;
+      font-size: 1rem;
+      color: #2c3c4e;
+    }
+
+    @media (max-width: 900px) {
+      .header-row {
+        grid-template-columns: 1fr;
+      }
+
+      .right-pane {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .document {
+        width: 96vw;
+        padding: 28px 22px 20px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .toolbar {
+        gap: 8px;
+        padding: 0 10px;
+      }
+
+      .toolbar-center {
+        display: none;
+      }
+
+      .right-pane {
+        grid-template-columns: 1fr;
+      }
+
+      .download-btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="pdf-viewer">
-    <embed src="Tanman Singh_CV_UIUX.pdf" type="application/pdf" />
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <div class="hamburger" aria-label="menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="file-name">sonali-resume-uxdesigner.pdf</div>
+    </div>
+
+    <div class="toolbar-center">
+      <span class="page-indicator">1 / 1</span>
+      <span class="toolbar-badge">100%</span>
+      <span class="toolbar-icon">−</span>
+      <span class="toolbar-icon">＋</span>
+      <span class="toolbar-icon">T</span>
+      <span class="toolbar-icon">✎</span>
+      <span class="toolbar-icon">⟲</span>
+    </div>
+
+    <div class="toolbar-right">
+      <span class="toolbar-icon">◌</span>
+      <span class="toolbar-icon">⤴</span>
+      <span class="toolbar-icon">⋮</span>
+    </div>
+  </div>
+
+  <div class="document-shell">
+    <div class="document">
+      <div class="header-row">
+        <div>
+          <h1 class="name">Tanman Singh</h1>
+          <div class="title">UI/UX Designer | Product Designer</div>
+          <a class="download-btn" href="Tanman Singh_CV_UIUX.pdf" download>⬇ Download CV</a>
+        </div>
+
+        <div class="right-pane">
+          <div class="info-block"><span class="icon-box">◌</span><div><strong>Portfolio</strong><br>tanman-singh-portfolio</div></div>
+          <div class="info-block"><span class="icon-box">◌</span><div><strong>LinkedIn</strong><br>linkedin.com/in/tanman</div></div>
+          <div class="info-block"><span class="icon-box">✉</span><div><strong>Email</strong><br>tanman@example.com</div></div>
+          <div class="info-block"><span class="icon-box">☎</span><div><strong>Phone</strong><br>+91 9876543210</div></div>
+          <div class="info-block"><span class="icon-box">✓</span><div><strong>Certifications</strong><br>Design Bootcamp, UX Research</div></div>
+          <div class="info-block"><span class="icon-box">🎓</span><div><strong>Education</strong><br>Bachelor of Design, 2020</div></div>
+        </div>
+      </div>
+
+      <div class="section about">
+        <h2>About Me</h2>
+        <p>
+          I am a UI/UX Designer with 2+ years of experience, specializing in creating intuitive and
+          user-friendly products. My approach emphasizes rapid testing of assumptions to optimize time
+          and resources. By working closely with clients, I transform their ideas into user-validated
+          solutions. I focus on prioritizing key features and user needs to build minimum viable
+          products (MVPs), enabling continuous iteration and improvement based on user feedback.
+        </p>
+      </div>
+
+      <div class="section experience">
+        <h2>Experience</h2>
+        <div class="job-title">UX designer | Taazaa Tech Pvt. Ltd.</div>
+        <div class="job-meta">April 2022 – Present, Noida</div>
+        <ul>
+          <li>Led the redesign of an EdTech platform, resulting in a 20% increase in user engagement and a 15% improvement in overall task completion rates, as measured by post-launch usability tests.</li>
+          <li>Conducted usability testing and iterative design processes, leading to a 30% reduction in user errors and a 25% enhancement in product performance.</li>
+          <li>Designed a comprehensive admin dashboard for a Chef-on-demand platform, streamlining operations for over 100 kitchen aides and improving task efficiency by 40%.</li>
+          <li>Led user research, developed information architecture, created wireframes, and delivered visual designs that contributed to a 20% increase in customer retention for Chef-on-demand.</li>
+          <li>Developed an optimized workflow for a real-time documentation solution for construction inspectors during inspections and site visits.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </body>
 </html>

@@ -26,23 +26,28 @@
     }
 
     .container {
-      max-width: 900px;
-      margin: 60px auto;
+      max-width: 1000px;
+      margin: 40px auto;
       padding: 30px;
+    }
+
+    .header {
       background: var(--card);
+      padding: 30px;
+      border-radius: 12px;
       border: 1px solid var(--border);
-      border-radius: 16px;
-      box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+      margin-bottom: 30px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
     }
 
     h1 {
       margin: 0 0 8px;
-      font-size: 2.4rem;
+      font-size: 2.2rem;
       color: var(--primary);
     }
 
     .subtitle {
-      margin: 0 0 24px;
+      margin: 0 0 20px;
       color: var(--muted);
       font-size: 1.05rem;
     }
@@ -52,10 +57,10 @@
       background: var(--accent);
       color: #fff;
       text-decoration: none;
-      padding: 12px 22px;
-      border-radius: 8px;
+      padding: 10px 18px;
+      border-radius: 6px;
       font-weight: 600;
-      margin: 12px 0 24px;
+      font-size: 0.95rem;
       transition: 0.2s ease;
     }
 
@@ -63,19 +68,25 @@
       background: #1d4ed8;
     }
 
-    .section {
-      margin-top: 24px;
+    .pdf-viewer {
+      background: var(--card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
     }
 
-    h2 {
-      font-size: 1.3rem;
-      margin-bottom: 10px;
-      color: var(--primary);
+    embed {
+      width: 100%;
+      height: 900px;
+      display: block;
     }
 
-    p {
-      margin: 6px 0;
-      color: var(--text);
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      color: var(--muted);
+      font-size: 0.9rem;
     }
 
     a {
@@ -86,31 +97,24 @@
     a:hover {
       text-decoration: underline;
     }
-
-    .small {
-      font-size: 0.96rem;
-      color: var(--muted);
-    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Tanman Singh</h1>
-    <p class="subtitle">UI/UX Designer | Product Designer</p>
-
-    <a class="button" href="Tanman Singh_CV_UIUX.pdf" target="_blank" rel="noopener noreferrer">Download CV (PDF)</a>
-
-    <div class="section">
-      <h2>Contact</h2>
-      <p>Email: your.email@example.com</p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">linkedin.com/in/yourprofile</a></p>
-      <p>GitHub: <a href="https://github.com/TanmanSingh" target="_blank" rel="noopener noreferrer">github.com/TanmanSingh</a></p>
+    <div class="header">
+      <h1>Tanman Singh</h1>
+      <p class="subtitle">UI/UX Designer | Product Designer</p>
+      <a class="button" href="Tanman Singh_CV_UIUX.pdf" download>⬇️ Download CV</a>
     </div>
 
-    <div class="section">
-      <h2>About</h2>
-      <p>I design user-centered digital experiences that combine clarity, usability, and business value.</p>
-      <p class="small">This page hosts my CV and portfolio-ready profile.</p>
+    <div class="pdf-viewer">
+      <embed src="Tanman Singh_CV_UIUX.pdf" type="application/pdf" />
+    </div>
+
+    <div class="footer">
+      <p>📧 Email: your.email@example.com | 
+         🔗 <a href="https://www.linkedin.com/in/yourprofile">LinkedIn</a> | 
+         🐙 <a href="https://github.com/TanmanSingh">GitHub</a></p>
     </div>
   </div>
 </body>
